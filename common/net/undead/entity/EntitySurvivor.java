@@ -67,7 +67,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob{
 		chatName = "<" + name + ">";
 		speedOnGround = 0.1F;
 		speedOnGround = 0.02F;
-		texture = null;
+		texture = UndeadMinecraft.EntityTextureLocation + "";
 		setSize(0.6F, 1.8F);
 		skinTexture = getRandomSkinLocation(1);
 		eyeTexture = getRandomSkinLocation(2);
