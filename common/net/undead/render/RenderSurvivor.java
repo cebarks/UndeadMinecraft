@@ -55,9 +55,7 @@ public class RenderSurvivor extends RenderBiped {
 			renderLivingLabel(entity, entity.name, d, d1, d2, 64);
 		}
 		if (entity.name.length() > 0 && entity.name != "" && entity.isFriends) {
-			renderLivingLabel(entity, "" + entity.name, d, d1, d2, 64); // I
-																		// removed
-																		// "snake-s + 2"!
+			renderLivingLabel(entity, "" + entity.name, d, d1, d2, 64);
 		}
 		if (entity.isDebug) {
 			renderLivingLabel(entity, "isLeader: " + entity.leader, d,

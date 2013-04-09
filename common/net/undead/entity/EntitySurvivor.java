@@ -76,7 +76,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob{
 		pantsTexture = getRandomSkinLocation(5);
 		shoesTexture = getRandomSkinLocation(6);
 		textureBuffer = new BufferedImage(64, 32, BufferedImage.TYPE_INT_ARGB);
-		setInvSize(27);
+		setInvSize(36);
 		textureInt = -1;
 		familyNumber = rand.nextInt(1000000000);
 		}
