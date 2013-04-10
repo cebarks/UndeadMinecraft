@@ -1,7 +1,9 @@
 package net.undead;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.WorldType;
 import net.undead.item.ItemBandage;
 import net.undead.item.ItemCamera;
 import net.undead.item.ItemCanOpener;
@@ -79,18 +81,21 @@ public class UndeadMinecraft {
 		LanguageRegistry.instance().addStringLocalization("entity.Survivor.name", "en_US", "Survivor");
 		
 		//Entity Shenanigans
-//		EntityRegistry.removeSpawn(net.minecraft.entity.monster.EntitySpider.class, EnumCreatureType.monster, BiomeGenBase.biomeList);
-//		EntityRegistry.removeSpawn(net.minecraft.entity.monster.EntityCreeper.class, EnumCreatureType.monster, BiomeGenBase.biomeList);
-//		EntityRegistry.removeSpawn(net.minecraft.entity.monster.EntityEnderman.class, EnumCreatureType.monster, BiomeGenBase.biomeList);
-//		EntityRegistry.removeSpawn(net.minecraft.entity.monster.EntityPigZombie.class, EnumCreatureType.monster, BiomeGenBase.biomeList);
-//		EntityRegistry.removeSpawn(net.minecraft.entity.monster.EntitySkeleton.class, EnumCreatureType.monster, BiomeGenBase.biomeList);
-//		EntityRegistry.removeSpawn(net.minecraft.entity.monster.EntitySilverfish.class, EnumCreatureType.monster, BiomeGenBase.biomeList);
-//		EntityRegistry.removeSpawn(net.minecraft.entity.monster.EntitySpider.class, EnumCreatureType.monster, BiomeGenBase.biomeList);
-//		EntityRegistry.removeSpawn(net.minecraft.entity.monster.EntityZombie.class, EnumCreatureType.monster, BiomeGenBase.biomeList);
+		EntityRegistry.removeSpawn(net.minecraft.entity.monster.EntitySpider.class, EnumCreatureType.monster, WorldType.base12Biomes);
+		EntityRegistry.removeSpawn(net.minecraft.entity.monster.EntityCreeper.class, EnumCreatureType.monster, WorldType.base12Biomes);
+		EntityRegistry.removeSpawn(net.minecraft.entity.monster.EntityEnderman.class, EnumCreatureType.monster, WorldType.base12Biomes);
+		EntityRegistry.removeSpawn(net.minecraft.entity.monster.EntityPigZombie.class, EnumCreatureType.monster, WorldType.base12Biomes);
+		EntityRegistry.removeSpawn(net.minecraft.entity.monster.EntitySkeleton.class, EnumCreatureType.monster, WorldType.base12Biomes);
+		EntityRegistry.removeSpawn(net.minecraft.entity.monster.EntitySilverfish.class, EnumCreatureType.monster, WorldType.base12Biomes);
+		EntityRegistry.removeSpawn(net.minecraft.entity.monster.EntitySpider.class, EnumCreatureType.monster, WorldType.base12Biomes);
+		EntityRegistry.removeSpawn(net.minecraft.entity.monster.EntityZombie.class, EnumCreatureType.monster, WorldType.base12Biomes);
 		
 		EntityRegistry.registerGlobalEntityID(net.undead.entity.EntityNewZombie.class, "NewZombie", 100, 0xFFFFFF, 0x000000);
 		EntityRegistry.registerGlobalEntityID(net.undead.entity.EntitySurvivor.class, "Survivor", 101, 0x008888, 0x880000);
 		
+		EntityRegistry.addSpawn(net.undead.entity.EntityNewZombie.class, 6, 0, 15, EnumCreatureType.monster, WorldType.base12Biomes);
+		EntityRegistry.addSpawn(net.undead.entity.EntitySurvivor.class, 2, 2, 4, EnumCreatureType.creature, WorldType.base12Biomes);
+
 		//Crafting :&
 		GameRegistry.addShapelessRecipe(new ItemStack(bandage, 1),  new Object[] {
 			new ItemStack(clothes, 1, 0), pocketKnife
@@ -108,7 +113,7 @@ public class UndeadMinecraft {
 	
 	@PostInit
 	public void postInit(FMLPostInitializationEvent event) {
-		
+
 	}
 	
 	public static CreativeTabs tabUndead = new CreativeTabs("tabUndead") {

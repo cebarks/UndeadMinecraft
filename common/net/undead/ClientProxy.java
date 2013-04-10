@@ -1,7 +1,6 @@
-package net.undead.client;
+package net.undead;
 
 import net.minecraft.client.model.ModelBiped;
-import net.undead.CommonProxy;
 import net.undead.render.RenderNewZombie;
 import net.undead.render.RenderSurvivor;
 import cpw.mods.fml.client.registry.RenderingRegistry;
