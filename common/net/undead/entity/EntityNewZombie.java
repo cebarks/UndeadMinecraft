@@ -40,10 +40,14 @@ public class EntityNewZombie extends EntityMob implements IMob{
 		tasks.addTask(6, new EntityAIWatchClosest(this, net.undead.entity.EntitySurvivor.class, 16F));
 		tasks.addTask(7, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, net.minecraft.entity.player.EntityPlayer.class, 32F, 0, true));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, net.minecraft.entity.passive.EntityAnimal.class, 16F, 0, false));
-		tasks.addTask(8, new EntityAINearestAttackableTarget(this, net.undead.entity.EntitySurvivor.class, 12F, 100, true));
-
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, net.minecraft.entity.player.EntityPlayer.class, 48F, 0, true));
+		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, net.minecraft.entity.passive.EntityAnimal.class, 16F, 0, false));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, net.undead.entity.EntitySurvivor.class, 32F, 0, true));
+	}
+	
+	@Override
+	public boolean canBreatheUnderwater() {
+		return true;
 	}
 	
 	public EntityNewZombie setEntityPosition(double x, double y, double z)

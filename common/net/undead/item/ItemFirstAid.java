@@ -13,17 +13,18 @@ public class ItemFirstAid extends Item {
 
 	public ItemFirstAid(int i) {
 		super(i);
-		setMaxStackSize(8);
+		setMaxStackSize(16);
 		setUnlocalizedName("firstAid");
 		setCreativeTab(UndeadMinecraft.tabUndead);
 	}
-
+	
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemstack, World world,
-			EntityPlayer entityplayer) {
-		itemstack.stackSize--;
-		entityplayer.heal(10);
-		return itemstack;
+	public ItemStack onEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
+		if(entityPlayer.getHealth()<entityPlayer.getMaxHealth()) {
+			itemStack.stackSize--;
+			entityPlayer.heal(6);
+		}
+		return super.onEaten(itemStack, world, entityPlayer);
 	}
 
 	@Override

@@ -44,7 +44,7 @@ public class UndeadMinecraft {
 	@Instance("UndeadMinecraft")
 	public static UndeadMinecraft instance;
 	
-	@SidedProxy(clientSide="net.undead.client.ClientProxy", serverSide="net.undead.CommonProxy")
+	@SidedProxy(clientSide="net.undead.ClientProxy", serverSide="net.undead.CommonProxy")
 	public static CommonProxy proxy;
 	
 	@PreInit
