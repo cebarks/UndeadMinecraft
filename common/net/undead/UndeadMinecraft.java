@@ -36,6 +36,9 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid = "UndeadMinecraft", name="UndeadMinecraft", version="0.0.1beta")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class UndeadMinecraft {
+	
+	public static String EntityTextureLocation = "/mods/UndeadMinecraft/textures/entity/";
+	
 	@Instance("UndeadMinecraft")
 	public static UndeadMinecraft instance;
 	

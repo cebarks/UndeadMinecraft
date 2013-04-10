@@ -29,7 +29,7 @@ public class EntityNewZombie extends EntityMob implements IMob{
 	public EntityNewZombie(World world) {
 		super(world);
 		setSize(0.6F, 1.8F);
-		texture = "/textures/ZombieMod/zombie" + (rand.nextInt(7) + 1) + ".png";
+		texture = UndeadMinecraft.EntityTextureLocation + "zombie" + (rand.nextInt(7) + 1) + ".png";
 		moveSpeed = .3F;
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIAttackOnCollide(this,
