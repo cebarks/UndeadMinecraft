@@ -35,7 +35,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.undead.DistanceChecker;
 import net.undead.UndeadMinecraft;
-import net.undead.gui.GuiSurvivalInventory;
 
 public class EntitySurvivor extends EntityWithInventory implements IMob {
 
@@ -49,10 +48,8 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
         tasks.addTask(4, new EntityAIWatchClosest(this, EntityNewZombie.class, 8F));
         tasks.addTask(5, new EntityAILookIdle(this));
         targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        targetTasks
-                .addTask(2, new EntityAINearestAttackableTarget(this, EntityNewZombie.class, 16F, 0, true));
-        targetTasks
-                .addTask(2, new EntityAINearestAttackableTarget(this, net.minecraft.entity.monster.EntityMob.class, 16F, 0, false));
+        targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityNewZombie.class, 16F, 0, true));
+        targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, net.minecraft.entity.monster.EntityMob.class, 16F, 0, false));
         isDebug = debugMode;
         firstName = pickRandomName(1);
         if (second == null) {
@@ -110,8 +107,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
         if (player != null) {
             float f = player.getDistanceToEntity(this);
             if (f > 4F && f < 16F) {
-                pathentity =
-                        worldObj.getPathEntityToEntity(this, player, 16F, true, false, false, true);
+                pathentity = worldObj.getPathEntityToEntity(this, player, 16F, true, false, false, true);
             } else {
                 pathentity = null;
             }
@@ -130,28 +126,16 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
         if (!isFriends && follower) {
             followerGreet();
         }
+        
+        if(isFriends){
+            openInventory(entityplayer);
+        }
 
         return true;
     }
 
     public boolean isItemValuable(Item item) {
-        Item valuable[] =
-                { Item.swordWood, Item.swordStone, Item.swordSteel,
-                        Item.swordGold, Item.swordGold, Item.swordDiamond,
-                        Item.diamond, Item.redstone, Item.bed, Item.cookie,
-                        Item.porkCooked, Item.porkRaw, Item.appleGold,
-                        Item.chickenCooked, Item.chickenRaw, Item.arrow,
-                        Item.bow, Item.axeSteel, Item.axeDiamond, Item.axeGold,
-                        Item.bootsGold, Item.bootsSteel, Item.bootsLeather,
-                        Item.legsChain, Item.legsDiamond, Item.legsGold,
-                        Item.legsSteel, Item.legsLeather, Item.bucketLava,
-                        Item.bucketMilk, Item.bucketEmpty, Item.boat,
-                        Item.minecartCrate, Item.minecartEmpty,
-                        Item.minecartPowered, Item.egg, Item.rottenFlesh,
-                        Item.goldNugget, Item.ingotGold, Item.ingotIron,
-                        Item.plateChain, Item.plateDiamond, Item.plateGold,
-                        Item.plateLeather, Item.plateSteel,
-                        UndeadMinecraft.clothes };
+        Item valuable[] = { Item.swordWood, Item.swordStone, Item.swordSteel, Item.swordGold, Item.swordGold, Item.swordDiamond, Item.diamond, Item.redstone, Item.bed, Item.cookie, Item.porkCooked, Item.porkRaw, Item.appleGold, Item.chickenCooked, Item.chickenRaw, Item.arrow, Item.bow, Item.axeSteel, Item.axeDiamond, Item.axeGold, Item.bootsGold, Item.bootsSteel, Item.bootsLeather, Item.legsChain, Item.legsDiamond, Item.legsGold, Item.legsSteel, Item.legsLeather, Item.bucketLava, Item.bucketMilk, Item.bucketEmpty, Item.boat, Item.minecartCrate, Item.minecartEmpty, Item.minecartPowered, Item.egg, Item.rottenFlesh, Item.goldNugget, Item.ingotGold, Item.ingotIron, Item.plateChain, Item.plateDiamond, Item.plateGold, Item.plateLeather, Item.plateSteel, UndeadMinecraft.clothes };
         for (Item i : valuable) {
             if (i.itemID == item.itemID) {
                 return true;
@@ -166,18 +150,14 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
 
     public void pickupItems() {
         @SuppressWarnings("unchecked")
-        ArrayList<EntityItem> items =
-                (ArrayList<EntityItem>) worldObj
-                        .getEntitiesWithinAABB(net.minecraft.entity.item.EntityItem.class, boundingBox
-                                .expand(16D, 32D, 16D));
+        ArrayList<EntityItem> items = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(net.minecraft.entity.item.EntityItem.class, boundingBox.expand(16D, 32D, 16D));
 
         if (items.isEmpty()) {
             return;
         }
         for (EntityItem item : items) {
             if (isItemValuable(item.getEntityItem().itemID)) {
-                setPathToEntity(worldObj
-                        .getPathEntityToEntity(this, item, 16F, true, false, false, true));
+                setPathToEntity(worldObj.getPathEntityToEntity(this, item, 16F, true, false, false, true));
             }
             if (item.getDistanceToEntity(this) < 2F) {
                 inventory.addItemStackToInventory(item.getEntityItem());
@@ -199,31 +179,14 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
         EntitySurvivor survivor2 = getLeader();
         if (survivor2 != null) {
 
-            String followergreet[] =
-                    {
-                            "Ermm.. i don't know, ask our leader, his name is "
-                                    + survivor2.firstName,
-                            "Ask our leader, " + survivor2.firstName + "...",
-                            "I'm not the one the one to decide, go and ask "
-                                    + survivor2.firstName + ".",
-                            "Don't waste my time! ask our leader, "
-                                    + survivor2.firstName + ".",
-                            "I don't know if i can trust you. I guess its "
-                                    + survivor2.firstName + "'s choice.",
-                            "Hey " + survivor2.firstName
-                                    + "... Think we can trust this guy?" };
+            String followergreet[] = { "Ermm.. i don't know, ask our leader, his name is " + survivor2.firstName, "Ask our leader, " + survivor2.firstName + "...", "I'm not the one the one to decide, go and ask " + survivor2.firstName + ".", "Don't waste my time! ask our leader, " + survivor2.firstName + ".", "I don't know if i can trust you. I guess its " + survivor2.firstName + "'s choice.", "Hey " + survivor2.firstName + "... Think we can trust this guy?" };
 
             say(followergreet[rand.nextInt(followergreet.length)]);
         }
     }
 
     public void leaderGreet() {
-        String leadergreet[] =
-                {
-                        "Oh, hello, Me and my family will help you out!",
-                        "You must have been through hell. Welcome to the family ",
-                        "Glad to see another friendly face",
-                        "Those things....I've seen what they do. If they catch you..." };
+        String leadergreet[] = { "Oh, hello, Me and my family will help you out!", "You must have been through hell. Welcome to the family ", "Glad to see another friendly face", "Those things....I've seen what they do. If they catch you..." };
         say(leadergreet[rand.nextInt(leadergreet.length)]);
     }
 
@@ -241,28 +204,22 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
         int shoesColour[] = { 1, 2, 3, 4, 5 };
 
         if (i == 1) {
-            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/blankChar"
-                    + skinColour[rand.nextInt(skinColour.length)] + ".png";
+            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/blankChar" + skinColour[rand.nextInt(skinColour.length)] + ".png";
         }
         if (i == 2) {
-            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/Eyes/eyes"
-                    + eyeColour[rand.nextInt(eyeColour.length)] + ".png";
+            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/Eyes/eyes" + eyeColour[rand.nextInt(eyeColour.length)] + ".png";
         }
         if (i == 3) {
-            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/Hair/hair"
-                    + hairColour[rand.nextInt(hairColour.length)] + ".png";
+            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/Hair/hair" + hairColour[rand.nextInt(hairColour.length)] + ".png";
         }
         if (i == 4) {
-            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/Shirts/shirt"
-                    + shirtColour[rand.nextInt(shirtColour.length)] + ".png";
+            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/Shirts/shirt" + shirtColour[rand.nextInt(shirtColour.length)] + ".png";
         }
         if (i == 5) {
-            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/Pants/pants"
-                    + pantsColour[rand.nextInt(pantsColour.length)] + ".png";
+            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/Pants/pants" + pantsColour[rand.nextInt(pantsColour.length)] + ".png";
         }
         if (i == 6) {
-            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/Shoes/shoes"
-                    + shoesColour[rand.nextInt(shoesColour.length)] + ".png";
+            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/Shoes/shoes" + shoesColour[rand.nextInt(shoesColour.length)] + ".png";
         }
         return null;
     }
@@ -279,15 +236,11 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void handleMembers() {
-        List nearby =
-                worldObj.getEntitiesWithinAABB(EntitySurvivor.class, AxisAlignedBB
-                        .getBoundingBox(posX, posY, posZ, posX + 1.0D, posY + 1.0D, posZ + 1.0D)
-                        .expand(16D, 4D, 16D));
+        List nearby = worldObj.getEntitiesWithinAABB(EntitySurvivor.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + 1.0D, posY + 1.0D, posZ + 1.0D).expand(16D, 4D, 16D));
         if (nearby.isEmpty()) {
             return;
         }
-        ArrayList<EntitySurvivor> nearbyFamily =
-                (ArrayList<EntitySurvivor>) nearby;
+        ArrayList<EntitySurvivor> nearbyFamily = (ArrayList<EntitySurvivor>) nearby;
         Collections.sort(nearbyFamily, new Comparator<EntitySurvivor>() {
             @Override
             public int compare(EntitySurvivor o1, EntitySurvivor o2) {
@@ -308,20 +261,17 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
                 becomeFriendsPlayer(survivor.friend);
             }
             if (survivor.getDistanceToEntity(this) > 4F) {
-                getNavigator()
-                        .setPath(worldObj.getPathEntityToEntity(this, survivor, 16F, true, false, false, true), moveSpeed);
+                getNavigator().setPath(worldObj.getPathEntityToEntity(this, survivor, 16F, true, false, false, true), moveSpeed);
             }
         }
     }
 
     private int getPotionEffect() {
         if (isPotionActive(Potion.digSpeed)) {
-            return 6 - (1 + getActivePotionEffect(Potion.digSpeed)
-                    .getAmplifier()) * 1;
+            return 6 - (1 + getActivePotionEffect(Potion.digSpeed).getAmplifier()) * 1;
         }
         if (isPotionActive(Potion.digSlowdown)) {
-            return 6 + (1 + getActivePotionEffect(Potion.digSlowdown)
-                    .getAmplifier()) * 2;
+            return 6 + (1 + getActivePotionEffect(Potion.digSlowdown).getAmplifier()) * 2;
         } else {
             return 6;
         }
@@ -372,11 +322,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
 
     @SuppressWarnings("unchecked")
     public void attackZombies() {
-        ArrayList<EntityNewZombie> zombies =
-                (ArrayList<EntityNewZombie>) worldObj
-                        .getEntitiesWithinAABB(EntityNewZombie.class, AxisAlignedBB
-                                .getBoundingBox(posX, posY, posZ, posX + 1.0D, posY + 1.0D, posZ + 1.0D)
-                                .expand(32D, 8D, 32D));
+        ArrayList<EntityNewZombie> zombies = (ArrayList<EntityNewZombie>) worldObj.getEntitiesWithinAABB(EntityNewZombie.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + 1.0D, posY + 1.0D, posZ + 1.0D).expand(32D, 8D, 32D));
         if (zombies.isEmpty()) {
             return;
         }
@@ -432,10 +378,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
     @SuppressWarnings("rawtypes")
     public EntitySurvivor getLeader() {
         EntitySurvivor survivor2 = null;
-        List list =
-                worldObj.getEntitiesWithinAABB(EntitySurvivor.class, AxisAlignedBB
-                        .getBoundingBox(posX, posY, posZ, posX + 1.0D, posY + 1.0D, posZ + 1.0D)
-                        .expand(32D, 8D, 32D));
+        List list = worldObj.getEntitiesWithinAABB(EntitySurvivor.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + 1.0D, posY + 1.0D, posZ + 1.0D).expand(32D, 8D, 32D));
         if (!list.isEmpty()) {
             for (int i = 0; i < list.size(); i++) {
                 EntitySurvivor survivor = (EntitySurvivor) list.get(i);
@@ -453,8 +396,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
     }
 
     public void say(String speech) {
-        ModLoader.getMinecraftInstance().thePlayer.addChatMessage(chatName
-                + " " + speech);
+        ModLoader.getMinecraftInstance().thePlayer.addChatMessage(chatName + " " + speech);
     }
 
     public String getName(int part) {
@@ -470,10 +412,9 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
         return null;
     }
 
-    public int calculateAS() {
-        if (getHeldItem() != null
-                && getHeldItem().getItem() instanceof ItemSword) {
-            return getHeldItem().getDamageVsEntity(thePlayer);
+    public int calculateAS(Entity entity) {
+        if (getHeldItem() != null && getHeldItem().getItem() instanceof ItemSword) {
+            return getHeldItem().getDamageVsEntity(entity);
         } else if (getHeldItem() == null) {
             return 2;
         } else {
@@ -483,7 +424,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
 
     protected void attackNormal(Entity entity, float distance, boolean weapon) {
         if (distance < 3.5F && attackTime-- <= 0) {
-            attackStrength = calculateAS();
+            attackStrength = calculateAS(entity);
             if (getHeldItem() != null) {
                 getHeldItem().damageItem(1, this);
             }
@@ -492,8 +433,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
             }
             Minecraft mc = ModLoader.getMinecraftInstance();
             if (!onGround) {
-                mc.effectRenderer
-                        .addEffect(new EntityCrit2FX(mc.theWorld, entity));
+                mc.effectRenderer.addEffect(new EntityCrit2FX(mc.theWorld, entity));
             }
             attackEntityAsMob(entity);
             attackTime = 30;
@@ -501,13 +441,10 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
     }
 
     protected void attackBow(Entity entity, float distance) {
-        if (distance < 15F && attackTime-- <= 0
-                && inventory.contains(Item.arrow.itemID)) {
-            EntityArrow entityarrow =
-                    new EntityArrow(worldObj, this, (EntityLiving) entityToAttack, 1.6F, 12F);
+        if (distance < 15F && attackTime-- <= 0 && inventory.contains(Item.arrow.itemID)) {
+            EntityArrow entityarrow = new EntityArrow(worldObj, this, (EntityLiving) entityToAttack, 1.6F, 12F);
             inventory.consumeInventoryItem(Item.arrow.itemID);
-            worldObj.playSoundAtEntity(this, "random.bow", 1.0F, 1.0F / (this
-                    .getRNG().nextFloat() * 0.4F + 0.8F));
+            worldObj.playSoundAtEntity(this, "random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
             if (distance < 5F) {
                 moveEntityWithHeading(0F, -0.5F);
             }
@@ -523,8 +460,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
 
     @Override
     protected void attackEntity(Entity entity, float f) {
-        if (getHeldItem() == null
-                || Item.itemsList[getHeldItem().itemID] instanceof ItemSword) {
+        if (getHeldItem() == null || Item.itemsList[getHeldItem().itemID] instanceof ItemSword) {
             attackNormal(entity, f, inventory.getStackInSlot(0) != null);
         }
         if (getHeldItem() != null && getHeldItem().itemID == Item.bow.itemID) {
@@ -534,8 +470,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
 
     @Override
     public void swingItem() {
-        if (!isSwinging || swingProgressInt >= getPotionEffect() / 2
-                || swingProgressInt < 0) {
+        if (!isSwinging || swingProgressInt >= getPotionEffect() / 2 || swingProgressInt < 0) {
             swingProgressInt = -1;
             isSwinging = true;
         }
@@ -552,8 +487,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
         }
 
         swingItem();
-        entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180F) * 2 * 0.5F, 0.10000000000000001D, MathHelper
-                .cos(rotationYaw * 3.141593F / 180F) * 2 * 0.5F);
+        entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180F) * 2 * 0.5F, 0.10000000000000001D, MathHelper.cos(rotationYaw * 3.141593F / 180F) * 2 * 0.5F);
         motionX *= 0.59999999999999998D;
         motionZ *= 0.59999999999999998D;
         setSprinting(false);
@@ -563,9 +497,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
     @Override
     public boolean attackEntityFrom(DamageSource damagesource, int i) {
         EntityLiving attackingentity = (EntityLiving) damagesource.getEntity();
-        if (attackingentity instanceof EntityPlayer && isFriends
-                || attackingentity instanceof EntitySurvivor
-                && isFamily((EntitySurvivor) attackingentity)) {
+        if (attackingentity instanceof EntityPlayer && isFriends || attackingentity instanceof EntitySurvivor && isFamily((EntitySurvivor) attackingentity)) {
             return false;
         }
         setAttackTarget(attackingentity);
@@ -578,16 +510,8 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
             shoutTime = 100 + rand.nextInt(500);
         }
         if (attacker instanceof EntityNewZombie) {
-            int distance =
-                    MathHelper
-                            .floor_double(attacker.getDistanceToEntity(this) + 1) / 10;
-            String zombieSpeech[] =
-                    {
-                            "Zombies! about " + distance + " block"
-                                    + (distance > 1 ? "s " : " ") + " away!",
-                            "I can see a walker!",
-                            "Roamers, " + distance + " block"
-                                    + (distance > 1 ? "s " : " ") + "away!" };
+            int distance = MathHelper.floor_double(attacker.getDistanceToEntity(this) + 1) / 10;
+            String zombieSpeech[] = { "Zombies! about " + distance + " block" + (distance > 1 ? "s " : " ") + " away!", "I can see a walker!", "Roamers, " + distance + " block" + (distance > 1 ? "s " : " ") + "away!" };
             if (shoutTime-- <= 0) {
                 say(zombieSpeech[rand.nextInt(zombieSpeech.length)]);
                 shoutTime = 1000 + rand.nextInt(2500);
@@ -596,32 +520,8 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
     }
 
     public String pickRandomName(int part) {
-        String namePart1[] =
-                { "Shaun", "Ruben", "Jonathan", "Anten", "Yonathan", "Jack",
-                        "Jake", "Simon", "Alex", "Oliver", "Nathan",
-                        "Nathaniel", "Charlie", "Michael", "Harry", "Connor",
-                        "Scott", "Robert", "Aaron", "Adam", "Lee", "Philip",
-                        "Daniel", "John", "Nick", "Samuel", "Luke", "James",
-                        "Liam", "Callum", "Eddie", "Joe", "Kieron", "Andie",
-                        "Andy", "Anthony", "Stewart", "Benjamin", "Brandon",
-                        "Peter", "Rodney", "Cameron", "Derren", "Darren",
-                        "Owen", "Bradley", "Curtis", "Darcy", "Daryl",
-                        "Declan", "Richard", "Dillon", "Ed", "Edd", "Evan",
-                        "Gavin", "Gaz", "Craig", "Jamie", "Chris", "Sebastian",
-                        "Joshua", "Albert", "Hayden", "Patrick", "Homer",
-                        "Marge", "Lisa", "Bart", "Jim", "Lewis", "Ben", };
-        String namePart2[] =
-                { "Lawton", "Pickup", "Mullins", "Wilson", "Williams",
-                        "Martin", "Heaney", "Harrison", "Wild", "Richards",
-                        "McGrath", "Maguire", "Clayton", "Manning", "Murphy",
-                        "Rogers", "Sid", "Ward", "Watkinson", "Ireland",
-                        "Crossley", "Lloyd", "Bailey", "Kennedy", "Neilson",
-                        "Davies", "Crompton", "Smith", "Brown", "Green",
-                        "Ogden", "Jordan", "Roberts", "Walkley", "Drysdale",
-                        "Ashworth", "Wesker", "Hicks", "Robinson", "Rogersen",
-                        "Denham", "Tomlinson", "Monks", "Large", "Buckley",
-                        "Jones", "Jackson", "Bell", "Blaire", "Butterworth",
-                        "Cosgrove", "Anderson", "Simpson" };
+        String namePart1[] = { "Shaun", "Ruben", "Jonathan", "Anten", "Yonathan", "Jack", "Jake", "Simon", "Alex", "Oliver", "Nathan", "Nathaniel", "Charlie", "Michael", "Harry", "Connor", "Scott", "Robert", "Aaron", "Adam", "Lee", "Philip", "Daniel", "John", "Nick", "Samuel", "Luke", "James", "Liam", "Callum", "Eddie", "Joe", "Kieron", "Andie", "Andy", "Anthony", "Stewart", "Benjamin", "Brandon", "Peter", "Rodney", "Cameron", "Derren", "Darren", "Owen", "Bradley", "Curtis", "Darcy", "Daryl", "Declan", "Richard", "Dillon", "Ed", "Edd", "Evan", "Gavin", "Gaz", "Craig", "Jamie", "Chris", "Sebastian", "Joshua", "Albert", "Hayden", "Patrick", "Homer", "Marge", "Lisa", "Bart", "Jim", "Lewis", "Ben", };
+        String namePart2[] = { "Lawton", "Pickup", "Mullins", "Wilson", "Williams", "Martin", "Heaney", "Harrison", "Wild", "Richards", "McGrath", "Maguire", "Clayton", "Manning", "Murphy", "Rogers", "Sid", "Ward", "Watkinson", "Ireland", "Crossley", "Lloyd", "Bailey", "Kennedy", "Neilson", "Davies", "Crompton", "Smith", "Brown", "Green", "Ogden", "Jordan", "Roberts", "Walkley", "Drysdale", "Ashworth", "Wesker", "Hicks", "Robinson", "Rogersen", "Denham", "Tomlinson", "Monks", "Large", "Buckley", "Jones", "Jackson", "Bell", "Blaire", "Butterworth", "Cosgrove", "Anderson", "Simpson" };
         if (part == 1) {
             return namePart1[rand.nextInt(namePart1.length)];
         } else if (part == 2) {
@@ -631,8 +531,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
     }
 
     public void switchItems(int item1Slot, int item2Slot) {
-        if (inventory.getStackInSlot(item1Slot) == null
-                || inventory.getStackInSlot(item2Slot) == null) {
+        if (inventory.getStackInSlot(item1Slot) == null || inventory.getStackInSlot(item2Slot) == null) {
             return;
         }
         ItemStack item1 = inventory.getStackInSlot(item1Slot);
@@ -643,10 +542,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
 
     @SuppressWarnings("unchecked")
     public boolean hasFamily() {
-        List<EntitySurvivor> list =
-                worldObj.getEntitiesWithinAABB(EntitySurvivor.class, AxisAlignedBB
-                        .getBoundingBox(posX, posY, posZ, posX + 1.0D, posY + 1.0D, posZ + 1.0D)
-                        .expand(32D, 8D, 32D));
+        List<EntitySurvivor> list = worldObj.getEntitiesWithinAABB(EntitySurvivor.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + 1.0D, posY + 1.0D, posZ + 1.0D).expand(32D, 8D, 32D));
         if (list.isEmpty()) {
             for (EntitySurvivor survivor : list) {
                 if (survivor.isFamily(this)) {
@@ -714,8 +610,9 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
     }
 
     @Override
-    public void openInventory(EntityPlayer theplayer) {
-        ModLoader.openGUI(theplayer, new GuiSurvivalInventory(theplayer, this));
+    public void openInventory(EntityPlayer player) {
+       player.openGui(UndeadMinecraft.instance, 100, worldObj, entityId, 0, 0);
+        // ModLoader.openGUI(theplayer, new GuiSurvivalInventory(theplayer, this));
     }
 
     public String        name;
@@ -745,8 +642,6 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
     public int           attackStrength;
     public ItemStack     heldItem;
     public ItemStack     defaultHeldItem;
-    public EntityPlayer  thePlayer     =
-                                               ModLoader.getMinecraftInstance().thePlayer;
     public int           shoutTime;
     public EntityPlayer  friend;
     public int           pickupTime;

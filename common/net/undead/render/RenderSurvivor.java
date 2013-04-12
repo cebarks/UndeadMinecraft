@@ -1,6 +1,5 @@
 package net.undead.render;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.imageio.ImageIO;
@@ -11,7 +10,6 @@ import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.src.ModLoader;
 import net.undead.entity.EntitySurvivor;
 
 public class RenderSurvivor extends RenderBiped {

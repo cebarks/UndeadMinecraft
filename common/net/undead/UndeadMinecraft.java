@@ -2,6 +2,7 @@ package net.undead;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.undead.gui.GuiHandler;
 import net.undead.item.ItemBandage;
 import net.undead.item.ItemCamera;
 import net.undead.item.ItemCanOpener;
@@ -28,6 +29,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -104,6 +106,8 @@ public class UndeadMinecraft {
 		GameRegistry.addShapelessRecipe(new ItemStack(bandage, 1),  new Object[] {
 			new ItemStack(clothes, 1, 3), pocketKnife
 		});
+		
+		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 	}
 	
 	@PostInit
