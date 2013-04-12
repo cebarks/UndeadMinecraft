@@ -382,9 +382,14 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
         }
         Collections.sort(zombies, new DistanceChecker(this));
         setAttackTarget(zombies.get(0));
+        dropInventory();
     }
 
-    public void becomeZombie() {
+    public void dropInventory() {
+		inventory.dropAllItems();
+	}
+
+	public void becomeZombie() {
         EntityNewZombie zombie = new EntityNewZombie(worldObj);
         zombie.setLocationAndAngles(posX, posY, posZ, rotationPitch, rotationYaw);
         worldObj.spawnEntityInWorld(zombie);

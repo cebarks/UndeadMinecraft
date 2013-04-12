@@ -77,7 +77,7 @@ public class EntityNewZombie extends EntityMob implements IMob{
 
 	@Override
 	public int getMaxHealth() {
-		return 20;
+		return 40;
 	}
 
 	private boolean playerLookingAtHead(EntityPlayer par1EntityPlayer) {
@@ -106,20 +106,16 @@ public class EntityNewZombie extends EntityMob implements IMob{
 
 	private Vec3 findPossibleLight() {
 
-		for (int i = 0; i < 125; i++) {
-			int j = MathHelper
-					.floor_double((posX + rand.nextInt(100)) - 50D);
-			int k = MathHelper.floor_double((boundingBox.minY + rand
-					.nextInt(50)) - 25D);
-			int l = MathHelper
-					.floor_double((posZ + rand.nextInt(100)) - 50D);
+		for (int i = 0; i < 250; i++) {
+			int j = MathHelper.floor_double((posX + rand.nextInt(100)) - 50D);
+			int k = MathHelper.floor_double((boundingBox.minY + rand.nextInt(50)) - 25D);
+			int l = MathHelper.floor_double((posZ + rand.nextInt(100)) - 50D);
 
 			if (worldObj.getFullBlockLightValue(j, k, l) > 10F
 					&& getBlockPathWeight(j, k, l) < 0.0F) {
 				return Vec3.createVectorHelper(j, k, l);
 			}
 		}
-
 		return null;
 	}
 
@@ -225,9 +221,8 @@ public class EntityNewZombie extends EntityMob implements IMob{
 
 	@Override
 	protected int getDropItemId() {
-		Random random = new Random();
 		
-		switch(random.nextInt(6)) {
+		switch(new Random().nextInt(32)) {
 			case 0:
 				entityDropItem(new ItemStack(UndeadMinecraft.clothes, 1, 0), 1.0F);
 			case 1:
@@ -236,12 +231,6 @@ public class EntityNewZombie extends EntityMob implements IMob{
 				entityDropItem(new ItemStack(UndeadMinecraft.clothes, 1, 2), 1.0F);
 			case 3:
 				entityDropItem(new ItemStack(UndeadMinecraft.clothes, 1, 0), 1.0F);
-			case 4:
-				return 0;
-			case 5:
-				return 0;
-			case 6:
-				return 0;
 		}
 		return 0;
 	}
