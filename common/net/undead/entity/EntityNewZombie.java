@@ -32,19 +32,22 @@ public class EntityNewZombie extends EntityMob implements IMob{
 		texture = UndeadMinecraft.EntityTextureLocation + "zombie" + (rand.nextInt(7) + 1) + ".png";
 		moveSpeed = .3F;
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIAttackOnCollide(this,
-				net.minecraft.entity.player.EntityPlayer.class, moveSpeed, false));
-		tasks.addTask(2, new EntityAIAttackOnCollide(this,
-				net.minecraft.entity.passive.EntityAnimal.class, moveSpeed, true));
-		tasks.addTask(3, new EntityAIWander(this, moveSpeed));
-		tasks.addTask(4, new EntityAIWatchClosest(this,
-				net.minecraft.entity.player.EntityPlayer.class, 8F));
-		tasks.addTask(5, new EntityAILookIdle(this));
+		tasks.addTask(1, new EntityAIAttackOnCollide(this, net.minecraft.entity.player.EntityPlayer.class, moveSpeed, false));
+		tasks.addTask(2, new EntityAIAttackOnCollide(this, net.minecraft.entity.passive.EntityAnimal.class, moveSpeed, true));
+		tasks.addTask(3, new EntityAIAttackOnCollide(this, net.undead.entity.EntitySurvivor.class, moveSpeed, true));
+		tasks.addTask(4, new EntityAIWander(this, moveSpeed));
+		tasks.addTask(5, new EntityAIWatchClosest(this, net.minecraft.entity.player.EntityPlayer.class, 16F));
+		tasks.addTask(6, new EntityAIWatchClosest(this, net.undead.entity.EntitySurvivor.class, 16F));
+		tasks.addTask(7, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this,
-				net.minecraft.entity.player.EntityPlayer.class, 32F, 0, true));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this,
-				net.minecraft.entity.passive.EntityAnimal.class, 16F, 0, false));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, net.minecraft.entity.player.EntityPlayer.class, 48F, 0, true));
+		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, net.minecraft.entity.passive.EntityAnimal.class, 16F, 0, false));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, net.undead.entity.EntitySurvivor.class, 32F, 0, true));
+	}
+	
+	@Override
+	public boolean canBreatheUnderwater() {
+		return true;
 	}
 	
 	public EntityNewZombie setEntityPosition(double x, double y, double z)

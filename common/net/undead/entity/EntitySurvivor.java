@@ -642,7 +642,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
     public int           attackStrength;
     public ItemStack     heldItem;
     public ItemStack     defaultHeldItem;
-    public int           shoutTime;
+                                               ModLoader.getMinecraftInstance().thePlayer;    public int           shoutTime;
     public EntityPlayer  friend;
     public int           pickupTime;
     public String        familygreet[] = { "" };

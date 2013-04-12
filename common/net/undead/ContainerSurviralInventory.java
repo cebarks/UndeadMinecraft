@@ -6,12 +6,12 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerSurviralInv extends Container {
+public class ContainerSurviralInventory extends Container {
 
 	private InventorySurvival mobInv;
 	public int numRows;
 
-	public ContainerSurviralInv(IInventory iinventory,
+	public ContainerSurviralInventory(IInventory iinventory,
 			InventorySurvival inventorySurvival) {
 		mobInv = inventorySurvival;
 		// creating the inventory slots for the mob. Should look to make this
