@@ -2,7 +2,7 @@ package net.undead.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import net.undead.ContainerSurviralInv;
+import net.undead.ContainerSurviralInventory;
 import net.undead.entity.EntitySurvivor;
 import cpw.mods.fml.common.network.IGuiHandler;
 
@@ -14,7 +14,7 @@ public class GuiHandler implements IGuiHandler{
         switch(ID) {
             case 100:
                 EntitySurvivor es = (EntitySurvivor) world.getEntityByID(x);
-                return new ContainerSurviralInv(player.inventory, es.inventory);
+                return new ContainerSurviralInventory(player.inventory, es.inventory);
         }
         
         return null;

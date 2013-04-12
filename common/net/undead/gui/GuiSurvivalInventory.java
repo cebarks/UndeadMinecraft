@@ -2,7 +2,7 @@ package net.undead.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.undead.ContainerSurviralInv;
+import net.undead.ContainerSurviralInventory;
 import net.undead.entity.EntitySurvivor;
 
 import org.lwjgl.opengl.GL11;
@@ -13,7 +13,7 @@ public class GuiSurvivalInventory extends GuiContainer {
     private EntitySurvivor theMob;
 
     public GuiSurvivalInventory(EntityPlayer p, EntitySurvivor m) {
-        super(new ContainerSurviralInv(p.inventory, m.inventory));
+        super(new ContainerSurviralInventory(p.inventory, m.inventory));
         thePlayer = p;
         theMob = m;
     }
