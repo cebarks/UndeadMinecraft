@@ -41,11 +41,11 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class UndeadMinecraft {
 	
-	@Instance("UndeadMinecraft")
+	@Instance(Reference.MOD_ID)
 	public static UndeadMinecraft instance;
 	
 	@SidedProxy(clientSide="net.undead.ClientProxy", serverSide="net.undead.CommonProxy")
-	public static CommonProxy proxy;
+	public static CommonProxy proxy; 
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
