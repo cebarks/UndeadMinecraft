@@ -34,6 +34,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.undead.DistanceChecker;
+import net.undead.Reference;
 import net.undead.UndeadMinecraft;
 
 public class EntitySurvivor extends EntityWithInventory implements IMob {
@@ -204,22 +205,22 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
         int shoesColour[] = { 1, 2, 3, 4, 5 };
 
         if (i == 1) {
-            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/blankChar" + skinColour[rand.nextInt(skinColour.length)] + ".png";
+            return Reference.EntityTextureLocation + "/Survivors/blankChar" + skinColour[rand.nextInt(skinColour.length)] + ".png";
         }
         if (i == 2) {
-            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/Eyes/eyes" + eyeColour[rand.nextInt(eyeColour.length)] + ".png";
+            return Reference.EntityTextureLocation + "/Survivors/Eyes/eyes" + eyeColour[rand.nextInt(eyeColour.length)] + ".png";
         }
         if (i == 3) {
-            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/Hair/hair" + hairColour[rand.nextInt(hairColour.length)] + ".png";
+            return Reference.EntityTextureLocation + "/Survivors/Hair/hair" + hairColour[rand.nextInt(hairColour.length)] + ".png";
         }
         if (i == 4) {
-            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/Shirts/shirt" + shirtColour[rand.nextInt(shirtColour.length)] + ".png";
+            return Reference.EntityTextureLocation + "/Survivors/Shirts/shirt" + shirtColour[rand.nextInt(shirtColour.length)] + ".png";
         }
         if (i == 5) {
-            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/Pants/pants" + pantsColour[rand.nextInt(pantsColour.length)] + ".png";
+            return Reference.EntityTextureLocation + "/Survivors/Pants/pants" + pantsColour[rand.nextInt(pantsColour.length)] + ".png";
         }
         if (i == 6) {
-            return "/mods/UndeadMinecraft/textures/other/ZombieMod/Survivors/Shoes/shoes" + shoesColour[rand.nextInt(shoesColour.length)] + ".png";
+            return Reference.EntityTextureLocation + "/Survivors/Shoes/shoes" + shoesColour[rand.nextInt(shoesColour.length)] + ".png";
         }
         return null;
     }

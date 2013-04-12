@@ -1,10 +1,11 @@
 package net.undead;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
-
-import net.undead.gui.GuiHandler;import net.minecraft.world.WorldType;import net.undead.item.ItemBandage;
+import net.minecraft.world.WorldType;
+import net.undead.creativetab.UndeadCreativeTab;
+import net.undead.gui.GuiHandler;
+import net.undead.item.ItemBandage;
 import net.undead.item.ItemCamera;
 import net.undead.item.ItemCanOpener;
 import net.undead.item.ItemCannedFood;
@@ -36,11 +37,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
-@Mod(modid = "UndeadMinecraft", name="UndeadMinecraft", version="0.0.1beta")
+@Mod(modid = Reference.MOD_ID, name=Reference.MOD_NAME, version=Reference.VERSION)
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 public class UndeadMinecraft {
-	
-	public static String EntityTextureLocation = "/mods/UndeadMinecraft/textures/entity/";
 	
 	@Instance("UndeadMinecraft")
 	public static UndeadMinecraft instance;
@@ -119,12 +118,8 @@ public class UndeadMinecraft {
 
 	}
 	
-	public static CreativeTabs tabUndead = new CreativeTabs("tabUndead") {
-        public ItemStack getIconItemStack() {
-                return new ItemStack(zombieLimb, 1, 0);
-        }
-};
-	
+	public final static UndeadCreativeTab tabUndead = new UndeadCreativeTab("tabUndead");
+
 	public final static ItemBandage bandage = new ItemBandage(5000);
 	public final static ItemCamera camera = new ItemCamera(5001);
 	public final static ItemCannedFood cannedFood = new ItemCannedFood(5002);

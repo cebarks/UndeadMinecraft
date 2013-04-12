@@ -22,6 +22,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.undead.Reference;
 import net.undead.UndeadMinecraft;
 
 public class EntityNewZombie extends EntityMob implements IMob{
@@ -29,7 +30,7 @@ public class EntityNewZombie extends EntityMob implements IMob{
 	public EntityNewZombie(World world) {
 		super(world);
 		setSize(0.6F, 1.8F);
-		texture = UndeadMinecraft.EntityTextureLocation + "zombie" + (rand.nextInt(7) + 1) + ".png";
+		texture = Reference.EntityTextureLocation + "zombie" + (rand.nextInt(7) + 1) + ".png";
 		moveSpeed = .3F;
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIAttackOnCollide(this, net.minecraft.entity.player.EntityPlayer.class, moveSpeed, false));
