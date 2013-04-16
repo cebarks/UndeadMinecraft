@@ -64,12 +64,14 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
         speedOnGround = 0.02F;
         texture = "/mods/UndeadMinecraft/textures/other/clear.png";
         setSize(0.6F, 1.8F);
-        skinTexture = getRandomSkinLocation(1);
-        eyeTexture = getRandomSkinLocation(2);
-        hairTexture = getRandomSkinLocation(3);
-        shirtTexture = getRandomSkinLocation(4);
-        pantsTexture = getRandomSkinLocation(5);
-        shoesTexture = getRandomSkinLocation(6);
+        if(skinTexture==null) {
+        	skinTexture = getRandomSkinLocation(1);
+            eyeTexture = getRandomSkinLocation(2);
+            hairTexture = getRandomSkinLocation(3);
+            shirtTexture = getRandomSkinLocation(4);
+            pantsTexture = getRandomSkinLocation(5);
+            shoesTexture = getRandomSkinLocation(6);
+        }
         textureBuffer = new BufferedImage(64, 32, BufferedImage.TYPE_INT_ARGB);
         setInvSize(36);
         textureInt = -1;
@@ -402,7 +404,10 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
     }
 
     public void say(String speech) {
-        ModLoader.getMinecraftInstance().thePlayer.addChatMessage(chatName + " " + speech);
+    	for(Object p:Reference.MC.theWorld.playerEntities.toArray()) {
+    		EntityPlayer player = (EntityPlayer) p;
+    		player.addChatMessage(chatName + " " + speech);
+    	}
     }
 
     public String getName(int part) {
@@ -437,7 +442,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
             if (rand.nextBoolean()) {
                 jump();
             }
-            Minecraft mc = ModLoader.getMinecraftInstance();
+            Minecraft mc = Reference.MC;
             if (!onGround) {
                 mc.effectRenderer.addEffect(new EntityCrit2FX(mc.theWorld, entity));
             }
@@ -561,9 +566,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
     }
 
     public ItemStack getRandomStarter() {
-        int i = rand.nextInt(16);
-
-        switch (i) {
+        switch (rand.nextInt(16)) {
             case 1:
                 return new ItemStack(Item.swordSteel, 1, rand.nextInt(100));
             case 2:
@@ -618,7 +621,6 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
     @Override
     public void openInventory(EntityPlayer player) {
        player.openGui(UndeadMinecraft.instance, 100, worldObj, entityId, 0, 0);
-        // ModLoader.openGUI(theplayer, new GuiSurvivalInventory(theplayer, this));
     }
 
     public String        name;
@@ -630,7 +632,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
     public boolean       isSprinting;
     protected float      speedOnGround;
     protected float      speedInAir;
-    public String        skinTexture;
+    public String        skinTexture = null;
     public String        eyeTexture;
     public String        hairTexture;
     public String        shirtTexture;
