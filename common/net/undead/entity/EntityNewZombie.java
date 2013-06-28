@@ -139,7 +139,7 @@ public class EntityNewZombie extends EntityMob implements IMob{
 				&& worldObj.getBlockId(s, d, f) != Block.waterStill.blockID
 				&& worldObj.getBlockId(s, d, f) != Block.obsidian.blockID
 				&& worldObj.getBlockId(s, d, f) != Block.bedrock.blockID
-				&& worldObj.getBlockId(s, d, f) != Block.doorSteel.blockID
+				&& worldObj.getBlockId(s, d, f) != Block.doorIron.blockID
 				&& worldObj.getBlockId(s, d, f) != Block.doorWood.blockID
 				&& worldObj.getBlockId(s, d, f) != 0
 				&& entityToAttack instanceof EntityPlayer) {

@@ -138,7 +138,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
     }
 
     public boolean isItemValuable(Item item) {
-        Item valuable[] = { Item.swordWood, Item.swordStone, Item.swordSteel, Item.swordGold, Item.swordGold, Item.swordDiamond, Item.diamond, Item.redstone, Item.bed, Item.cookie, Item.porkCooked, Item.porkRaw, Item.appleGold, Item.chickenCooked, Item.chickenRaw, Item.arrow, Item.bow, Item.axeSteel, Item.axeDiamond, Item.axeGold, Item.bootsGold, Item.bootsSteel, Item.bootsLeather, Item.legsChain, Item.legsDiamond, Item.legsGold, Item.legsSteel, Item.legsLeather, Item.bucketLava, Item.bucketMilk, Item.bucketEmpty, Item.boat, Item.minecartCrate, Item.minecartEmpty, Item.minecartPowered, Item.egg, Item.rottenFlesh, Item.goldNugget, Item.ingotGold, Item.ingotIron, Item.plateChain, Item.plateDiamond, Item.plateGold, Item.plateLeather, Item.plateSteel, UndeadMinecraft.clothes };
+        Item valuable[] = { Item.swordWood, Item.swordStone, Item.swordIron, Item.swordGold, Item.swordGold, Item.swordDiamond, Item.diamond, Item.redstone, Item.bed, Item.cookie, Item.porkCooked, Item.porkRaw, Item.appleGold, Item.chickenCooked, Item.chickenRaw, Item.arrow, Item.bow, Item.axeIron, Item.axeDiamond, Item.axeGold, Item.bootsGold, Item.bootsIron, Item.bootsLeather, Item.legsChain, Item.legsDiamond, Item.legsGold, Item.legsIron, Item.legsLeather, Item.bucketLava, Item.bucketMilk, Item.bucketEmpty, Item.boat, Item.minecartCrate, Item.minecartEmpty, Item.minecartPowered, Item.egg, Item.rottenFlesh, Item.goldNugget, Item.ingotGold, Item.ingotIron, Item.plateChain, Item.plateDiamond, Item.plateGold, Item.plateLeather, Item.plateIron, UndeadMinecraft.clothes };
         for (Item i : valuable) {
             if (i.itemID == item.itemID) {
                 return true;
@@ -568,7 +568,7 @@ public class EntitySurvivor extends EntityWithInventory implements IMob {
     public ItemStack getRandomStarter() {
         switch (rand.nextInt(16)) {
             case 1:
-                return new ItemStack(Item.swordSteel, 1, rand.nextInt(100));
+                return new ItemStack(Item.swordIron, 1, rand.nextInt(100));
             case 2:
                 return new ItemStack(Item.swordWood, 1, rand.nextInt(100));
             case 3:
