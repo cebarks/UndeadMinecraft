@@ -12,6 +12,6 @@ UndeadMinecraft
 ##Contributors
 
 - xXxRubxXx
-- pizzernam
+- pizzaernam
 - ShaunXD
 - cebarks
