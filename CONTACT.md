@@ -11,6 +11,6 @@
 
 ##cebarks
 - Skype: cebarks
-- Twitter: cbearks
+- Twitter: @cebarks
 - Github: cebarks
 
